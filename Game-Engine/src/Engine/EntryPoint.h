@@ -9,6 +9,7 @@ int main(int argc, char** argv)
 	GameEngine::Log::Init();
 	GE_CORE_WARN("Initialized Log!");
 	GE_INFO("Initialized Log! Var = {0}", 23);
+	GE_CRITICAL("THIS IS AN fatal message");
 
 	auto app = GameEngine::CreateApplication();
 	app->Run();
