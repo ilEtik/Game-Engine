@@ -5,7 +5,7 @@ workspace "Game-Engine"
 	{
 		"Debug",
 		"Release",
-		"Dist"
+		"Distribution"
 	}
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
@@ -16,7 +16,7 @@ project "Game-Engine"
 	language "C++"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+	objdir ("intermediate/" .. outputdir .. "/%{prj.name}")
 
 	files
 	{
@@ -31,7 +31,7 @@ project "Game-Engine"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
+		cppdialect "C++20"
 		staticruntime "on"
 		systemversion "latest"
 
@@ -43,7 +43,7 @@ project "Game-Engine"
 
 		postbuildcommands
 		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
+			("{COPYFILE} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
 		}
 
 	filter "configurations:Debug"
@@ -54,8 +54,8 @@ project "Game-Engine"
 		defines "GE_RELEASE"
 		optimize "On"
 
-	filter "configurations:Dist"
-		defines "GE_DIST"
+	filter "configurations:Distribution"
+		defines "GE_DISTRIBUTION"
 		optimize "On"
 
 project "Sandbox"
@@ -64,7 +64,7 @@ project "Sandbox"
 	language "C++"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
-	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+	objdir ("intermediate/" .. outputdir .. "/%{prj.name}")
 
 	files
 	{
@@ -84,7 +84,7 @@ project "Sandbox"
 	}
 
 	filter "system:windows"
-		cppdialect "C++17"
+		cppdialect "C++20"
 		staticruntime "On"
 		systemversion "latest"
 
@@ -103,7 +103,7 @@ project "Sandbox"
 		runtime "Release"
 		optimize "on"
 
-	filter "configurations:Dist"
-		defines "GE_DIST"
+	filter "configurations:Distribution"
+		defines "GE_DISTRIBUTION"
 		runtime "Release"
 		optimize "on"

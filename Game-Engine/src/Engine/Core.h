@@ -5,9 +5,9 @@
 		#define GAMEENGINE_API _declspec(dllexport)
 	#else
 		#define GAMEENGINE_API _declspec(dllimport)
-	#endif // GE_BUILD_DLL
+	#endif
 #else
 	#error GameEngine only supports Windows!
-#endif // GE_PLATFORM_WINDOWS
+#endif
 
 #define BIT(x) (1 << x)
