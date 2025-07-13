@@ -41,11 +41,6 @@ project "Game-Engine"
 			"GE_BUILD_DLL"
 		}
 
-		postbuildcommands
-		{
-			("{COPYFILE} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
-		}
-
 	filter "configurations:Debug"
 		defines "GE_DEBUG"
 		symbols "On"
@@ -91,6 +86,11 @@ project "Sandbox"
 		defines
 		{
 			"GE_PLATFORM_WINDOWS"
+		}
+
+		postbuildcommands
+		{
+			("{COPYDIR} ../bin/" .. outputdir .. "/Game-Engine/Game-Engine.dll %{cfg.targetdir}")
 		}
 
 	filter "configurations:Debug"
