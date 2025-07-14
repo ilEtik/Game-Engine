@@ -8,7 +8,7 @@ namespace GameEngine
 {
 	Application::Application()
 	{
-
+		_window = std::unique_ptr<Window>(Window::Create());
 	}
 
 	Application::~Application()
@@ -18,12 +18,9 @@ namespace GameEngine
 
 	void Application::Run()
 	{
-		WindowResizeEvent e(1200, 720);
-		GE_LOG_TRACE(e);
-
-		while (true)
+		while (_running)
 		{
-
+			_window->OnUpdate();
 		}
 	}
 }
