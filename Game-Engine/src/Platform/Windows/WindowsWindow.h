@@ -23,11 +23,14 @@ namespace GameEngine
 
 	private:
 		virtual void Init(const WindowProps& props);
+
+	private:
 		virtual void Shutdown();
 
 	private:
 		GLFWwindow* _window;
 
+	public:
 		struct WindowData
 		{
 			std::string Title;

@@ -2,6 +2,7 @@
 
 #include "Core.h"
 #include "Events/Event.h"
+#include "Events/ApplicationEvent.h"
 #include "Window.h"
 
 namespace GameEngine
@@ -14,7 +15,13 @@ namespace GameEngine
 
 		void Run();
 
+		void OnEvent(Event& event);
+
 	private:
+		bool OnWindowClose(WindowCloseEvent& event);
+
+	private:
+
 		std::unique_ptr<Window> _window;
 		bool _running = true;
 	};
