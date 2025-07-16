@@ -21,15 +21,15 @@ namespace GameEngine
 }
 
 // Core log macros
-#define GE_CORE_LOG_TRACE(...)		::GameEngine::Log::GetCoreLogger()->trace(__VA_ARGS__)
-#define GE_CORE_LOG_INFO(...)		::GameEngine::Log::GetCoreLogger()->info(__VA_ARGS__)
-#define GE_CORE_LOG_WARN(...)		::GameEngine::Log::GetCoreLogger()->warn(__VA_ARGS__)
-#define GE_CORE_LOG_ERROR(...)		::GameEngine::Log::GetCoreLogger()->error(__VA_ARGS__)
-#define GE_CORE_LOG_CRITICAL(...)	::GameEngine::Log::GetCoreLogger()->critical(__VA_ARGS__)
+#define CORE_LOG_TRACE(...)		::GameEngine::Log::GetCoreLogger()->trace(__VA_ARGS__)
+#define CORE_LOG_INFO(...)		::GameEngine::Log::GetCoreLogger()->info(__VA_ARGS__)
+#define CORE_LOG_WARN(...)		::GameEngine::Log::GetCoreLogger()->warn(__VA_ARGS__)
+#define CORE_LOG_ERROR(...)		::GameEngine::Log::GetCoreLogger()->error(__VA_ARGS__)
+#define CORE_LOG_CRITICAL(...)	::GameEngine::Log::GetCoreLogger()->critical(__VA_ARGS__)
 
 // Client log macros
-#define GE_LOG_TRACE(...)			::GameEngine::Log::GetClientLogger()->trace(__VA_ARGS__)
-#define GE_LOG_INFO(...)			::GameEngine::Log::GetClientLogger()->info(__VA_ARGS__)
-#define GE_LOG_WARN(...)			::GameEngine::Log::GetClientLogger()->warn(__VA_ARGS__)
-#define GE_LOG_ERROR(...)			::GameEngine::Log::GetClientLogger()->error(__VA_ARGS__)
-#define GE_LOG_CRITICAL(...)		::GameEngine::Log::GetClientLogger()->critical(__VA_ARGS__)
+#define LOG_TRACE(...)			::GameEngine::Log::GetClientLogger()->trace(__VA_ARGS__)
+#define LOG_INFO(...)			::GameEngine::Log::GetClientLogger()->info(__VA_ARGS__)
+#define LOG_WARN(...)			::GameEngine::Log::GetClientLogger()->warn(__VA_ARGS__)
+#define LOG_ERROR(...)			::GameEngine::Log::GetClientLogger()->error(__VA_ARGS__)
+#define LOG_CRITICAL(...)		::GameEngine::Log::GetClientLogger()->critical(__VA_ARGS__)

@@ -5,13 +5,15 @@
 #include "Engine/Events/KeyEvent.h"
 #include "Engine/Events/MouseEvent.h"
 
+#include <glad/glad.h>
+
 namespace GameEngine
 {
 	static bool _glfwInitialized = false;
 
 	static void GLFWErrorCallback(int error_code, const char* description)
 	{
-		GE_CORE_LOG_ERROR("GLFW Error ({0}): {1}", error_code, description);
+		CORE_LOG_ERROR("GLFW Error ({0}): {1}", error_code, description);
 	}
 
 	Window* Window::Create(const WindowProps& props)
@@ -35,7 +37,7 @@ namespace GameEngine
 		_data.Width = props.Width;
 		_data.Height = props.Height;
 
-		GE_CORE_LOG_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
+		CORE_LOG_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
 
 		if (!_glfwInitialized)
 		{
@@ -47,6 +49,8 @@ namespace GameEngine
 
 		_window = glfwCreateWindow((int)props.Width, (int)props.Height, _data.Title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(_window);
+		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		GE_CORE_ASSERT(status, "Failed to initialize GLAD!");
 		glfwSetWindowUserPointer(_window, &_data);
 		SetVSync(true);
 

@@ -1,9 +1,10 @@
 #pragma once
 
 #include "Core.h"
+#include "Window.h"
 #include "Events/Event.h"
 #include "Events/ApplicationEvent.h"
-#include "Window.h"
+#include "Engine/LayerStack.h"
 
 namespace GameEngine
 {
@@ -17,6 +18,9 @@ namespace GameEngine
 
 		void OnEvent(Event& event);
 
+		void PushLayer(Layer* layer);
+		void PushOverlay(Layer* overlay);
+
 	private:
 		bool OnWindowClose(WindowCloseEvent& event);
 
@@ -24,6 +28,7 @@ namespace GameEngine
 
 		std::unique_ptr<Window> _window;
 		bool _running = true;
+		LayerStack _layerStack;
 	};
 
 	//To be defined in client.
