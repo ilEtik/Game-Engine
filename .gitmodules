@@ -4,3 +4,6 @@
 [submodule "Game-Engine/vendor/glfw"]
 	path = Game-Engine/vendor/glfw
 	url = https://github.com/TheCherno/glfw.git
+[submodule "Game-Engine/vendor/imgui"]
+	path = Game-Engine/vendor/imgui
+	url = https://github.com/TheCherno/imgui

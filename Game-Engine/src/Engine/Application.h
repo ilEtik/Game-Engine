@@ -21,10 +21,15 @@ namespace GameEngine
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* overlay);
 
+		inline static Application& Get() { return *_instance; }
+
+		inline Window& GetWindow() { return *_window; }
+
 	private:
 		bool OnWindowClose(WindowCloseEvent& event);
 
 	private:
+		static Application* _instance;
 
 		std::unique_ptr<Window> _window;
 		bool _running = true;
