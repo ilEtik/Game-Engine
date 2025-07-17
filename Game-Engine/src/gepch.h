@@ -13,6 +13,7 @@
 #include <unordered_set>
 
 #include "Engine/Log.h"
+#include "Engine/Core.h"
 
 
 
