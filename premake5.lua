@@ -1,5 +1,6 @@
 workspace "Game-Engine"
 	architecture "x64"
+	startproject "Sandbox"
 
 	configurations
 	{
@@ -15,9 +16,12 @@ IncludeDir["glfw"] = "Game-Engine/vendor/glfw/include"
 IncludeDir["glad"] = "Game-Engine/vendor/glad/include"
 IncludeDir["imgui"] = "Game-Engine/vendor/imgui"
 
-include "Game-Engine/vendor/glfw"
-include "Game-Engine/vendor/glad"
-include "Game-Engine/vendor/imgui"
+group "Dependencies"
+	include "Game-Engine/vendor/glfw"
+	include "Game-Engine/vendor/glad"
+	include "Game-Engine/vendor/imgui"
+
+group ""
 
 project "Game-Engine"
 	location "Game-Engine"
@@ -63,6 +67,11 @@ project "Game-Engine"
 			"GE_PLATFORM_WINDOWS",
 			"GE_BUILD_DLL",
 			"GLFW_INCLUDE_NONE"
+		}
+		
+		postbuildcommands
+		{
+			("{COPYDIR} \"%{cfg.buildtarget.relpath}\" \"../bin/" .. outputdir .. "/Sandbox/\"")
 		}
 
 	filter "configurations:Debug"
@@ -113,11 +122,6 @@ project "Sandbox"
 		defines
 		{
 			"GE_PLATFORM_WINDOWS"
-		}
-
-		postbuildcommands
-		{
-			("{COPYDIR} ../bin/" .. outputdir .. "/Game-Engine/Game-Engine.dll %{cfg.targetdir}")
 		}
 
 	filter "configurations:Debug"

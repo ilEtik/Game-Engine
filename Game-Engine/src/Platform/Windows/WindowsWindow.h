@@ -12,14 +12,16 @@ namespace GameEngine
 		WindowsWindow(const WindowProps& props);
 		virtual ~WindowsWindow();
 
-		void OnUpdate() override;
+		virtual void OnUpdate() override;
 
-		inline unsigned int GetWidth() const override { return _data.Width; }
-		inline unsigned int GetHeight() const override { return _data.Height; }
+		inline virtual unsigned int GetWidth() const override { return _data.Width; }
+		inline virtual unsigned int GetHeight() const override { return _data.Height; }
 
-		inline void SetEventCallback(const EventCallbackFn& callback) override { _data.EventCallback = callback; }
-		void SetVSync(bool enabled) override;
-		bool IsVSync() const override;
+		inline virtual void SetEventCallback(const EventCallbackFn& callback) override { _data.EventCallback = callback; }
+		virtual void SetVSync(bool enabled) override;
+		virtual bool IsVSync() const override;
+
+		inline virtual void* GetNativeWindow() const override { return _window; }
 
 	private:
 		virtual void Init(const WindowProps& props);

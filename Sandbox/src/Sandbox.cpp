@@ -10,12 +10,10 @@ public:
 
 	void OnUpdate() override
 	{
-		LOG_INFO("ExampleLayer::OnUpdate");
 	}
 
 	void OnEvent(GameEngine::Event& event) override
 	{
-		LOG_TRACE("{0}", event);
 	}
 };
 
