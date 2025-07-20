@@ -10,6 +10,10 @@ public:
 
 	void OnUpdate() override
 	{
+		if (GameEngine::Input::IsKeyPressed(GE_KEY_TAB))
+		{
+			LOG_INFO("Tab Key is pressed!");
+		}
 	}
 
 	void OnEvent(GameEngine::Event& event) override
