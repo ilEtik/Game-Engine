@@ -15,6 +15,9 @@ namespace GameEngine
 
 		_window = std::unique_ptr<Window>(Window::Create());
 		_window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
+
+		_imGuiLayer = new ImGuiLayer();
+		PushOverlay(_imGuiLayer);
 	}
 
 	Application::~Application()
@@ -33,6 +36,14 @@ namespace GameEngine
 			{
 				layer->OnUpdate();
 			}
+
+			// will be moved to render threat later
+			_imGuiLayer->Begin();
+			for (Layer* layer : _layerStack)
+			{
+				_imGuiLayer->OnImGuiRender();
+			}
+			_imGuiLayer->End();
 
 			_window->OnUpdate();
 		}

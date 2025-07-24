@@ -25,8 +25,6 @@ namespace GameEngine
 
 	private:
 		virtual void Init(const WindowProps& props);
-
-	private:
 		virtual void Shutdown();
 
 	private:

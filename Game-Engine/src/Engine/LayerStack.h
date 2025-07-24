@@ -23,6 +23,6 @@ namespace GameEngine
 
 	private:
 		std::vector<Layer*> _layers;
-		std::vector<Layer*>::iterator _layerInsert;
+		unsigned int _layerInsertIndex = 0;
 	};
 }

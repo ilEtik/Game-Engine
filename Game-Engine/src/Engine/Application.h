@@ -6,6 +6,8 @@
 #include "Events/ApplicationEvent.h"
 #include "Engine/LayerStack.h"
 
+#include "Engine/ImGui/ImGuiLayer.h"
+
 namespace GameEngine
 {
 	class GAMEENGINE_API Application
@@ -32,8 +34,11 @@ namespace GameEngine
 		static Application* _instance;
 
 		std::unique_ptr<Window> _window;
-		bool _running = true;
 		LayerStack _layerStack;
+
+		bool _running = true;
+
+		ImGuiLayer* _imGuiLayer;
 	};
 
 	//To be defined in client.
