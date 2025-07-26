@@ -39,6 +39,8 @@ namespace GameEngine
 		bool _running = true;
 
 		ImGuiLayer* _imGuiLayer;
+
+		unsigned int _vertexArray, _vertexBuffer, _indexBuffer;
 	};
 
 	//To be defined in client.

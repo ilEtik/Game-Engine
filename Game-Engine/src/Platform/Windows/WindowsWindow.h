@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Engine/Window.h"
+#include "Engine/Renderer/GraphicsContext.h"
 
 #include <glfw/glfw3.h>
 
@@ -29,6 +30,7 @@ namespace GameEngine
 
 	private:
 		GLFWwindow* _window;
+		GraphicsContext* _context;
 
 	public:
 		struct WindowData
