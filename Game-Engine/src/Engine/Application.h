@@ -9,6 +9,7 @@
 #include "Engine/ImGui/ImGuiLayer.h"
 
 #include "Engine/Renderer/Shader.h"
+#include "Engine/Renderer/Buffer.h"
 
 namespace GameEngine
 {
@@ -42,8 +43,10 @@ namespace GameEngine
 
 		ImGuiLayer* _imGuiLayer;
 
-		unsigned int _vertexArray, _vertexBuffer, _indexBuffer;
+		unsigned int _vertexArray;
 		std::unique_ptr<Shader> _shader;
+		std::unique_ptr<VertexBuffer> _vertexBuffer;
+		std::unique_ptr<IndexBuffer> _indexBuffer;
 	};
 
 	//To be defined in client.
