@@ -41,7 +41,7 @@ namespace GameEngine
 			_imGuiLayer->Begin();
 			for (Layer* layer : _layerStack)
 			{
-				_imGuiLayer->OnImGuiRender();
+				layer->OnImGuiRender();
 			}
 			_imGuiLayer->End();
 
