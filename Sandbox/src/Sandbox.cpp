@@ -1,5 +1,7 @@
 #include <GameEngine.h>
 
+#include "imgui/imgui.h"
+
 class ExampleLayer : public GameEngine::Layer
 {
 public:
@@ -8,12 +10,16 @@ public:
 
 	}
 
-	void OnUpdate() override
+	virtual void OnUpdate() override
 	{
-		if (GameEngine::Input::IsKeyPressed(GE_KEY_TAB))
-		{
-			LOG_INFO("Tab Key is pressed!");
-		}
+	
+	}
+
+	virtual void OnImGuiRender() override
+	{
+		ImGui::Begin("Test");
+		ImGui::Text("Hello World!");
+		ImGui::End();
 	}
 
 	void OnEvent(GameEngine::Event& event) override

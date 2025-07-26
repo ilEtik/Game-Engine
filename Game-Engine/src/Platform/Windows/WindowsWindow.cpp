@@ -136,7 +136,7 @@ namespace GameEngine
 		if (!_glfwInitialized)
 		{
 			int success = glfwInit();
-			GE_CORE_ASSERT(success, "Could not initialize GLFW!");
+			CORE_ASSERT(success, "Could not initialize GLFW!");
 			glfwSetErrorCallback(GLFWErrorCallback);
 			_glfwInitialized = true;
 		}
@@ -144,7 +144,7 @@ namespace GameEngine
 		_window = glfwCreateWindow((int)props.Width, (int)props.Height, _data.Title.c_str(), nullptr, nullptr);
 		glfwMakeContextCurrent(_window);
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		GE_CORE_ASSERT(status, "Failed to initialize GLAD!");
+		CORE_ASSERT(status, "Failed to initialize GLAD!");
 		glfwSetWindowUserPointer(_window, &_data);
 		SetVSync(true);
 

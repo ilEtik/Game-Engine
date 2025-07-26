@@ -27,10 +27,10 @@ group ""
 
 project "Game-Engine"
 	location "Game-Engine"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
 	cppdialect "C++20"
-	staticruntime "off"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("intermediate/" .. outputdir .. "/%{prj.name}")
@@ -44,6 +44,12 @@ project "Game-Engine"
 		"%{prj.name}/src/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl"
+	}
+
+	defines
+	{
+		"_CRT_SECURE_NO_WARNINGS",
+		"_SILENCE_ALL_MS_EXT_DEPRECATION_WARNINGS"
 	}
 
 	includedirs
@@ -74,32 +80,27 @@ project "Game-Engine"
 			"GLFW_INCLUDE_NONE"
 		}
 		
-		postbuildcommands
-		{
-			("{COPYDIR} \"%{cfg.buildtarget.relpath}\" \"../bin/" .. outputdir .. "/Sandbox/\"")
-		}
-
 	filter "configurations:Debug"
 		defines "GE_DEBUG"
 		runtime "Debug"
-		symbols "On"
+		symbols "on"
 
 	filter "configurations:Release"
 		defines "GE_RELEASE"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 
 	filter "configurations:Distribution"
 		defines "GE_DISTRIBUTION"
 		runtime "Release"
-		optimize "On"
+		optimize "on"
 
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
 	cppdialect "C++20"
-	staticruntime "off"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("intermediate/" .. outputdir .. "/%{prj.name}")
@@ -114,6 +115,7 @@ project "Sandbox"
 	{
 		"Game-Engine/vendor/spdlog/include",
 		"Game-Engine/src",
+		"Game-Engine/vendor",
 		"%{IncludeDir.glm}"
 	}
 
