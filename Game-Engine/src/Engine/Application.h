@@ -8,6 +8,8 @@
 
 #include "Engine/ImGui/ImGuiLayer.h"
 
+#include "Engine/Renderer/Shader.h"
+
 namespace GameEngine
 {
 	class GAMEENGINE_API Application
@@ -41,6 +43,7 @@ namespace GameEngine
 		ImGuiLayer* _imGuiLayer;
 
 		unsigned int _vertexArray, _vertexBuffer, _indexBuffer;
+		std::unique_ptr<Shader> _shader;
 	};
 
 	//To be defined in client.
