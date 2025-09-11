@@ -11,27 +11,6 @@ namespace GameEngine
 {
 	Application* Application::_instance = nullptr;
 
-	static GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type)
-	{
-		switch (type)
-		{
-			case ShaderDataType::Float:		return GL_FLOAT;
-			case ShaderDataType::Float2:	return GL_FLOAT;
-			case ShaderDataType::Float3:	return GL_FLOAT;
-			case ShaderDataType::Float4:	return GL_FLOAT;
-			case ShaderDataType::Mat3:		return GL_FLOAT;
-			case ShaderDataType::Mat4:		return GL_FLOAT;
-			case ShaderDataType::Int:		return GL_INT;
-			case ShaderDataType::Int2:		return GL_INT;
-			case ShaderDataType::Int3:		return GL_INT;
-			case ShaderDataType::Int4:		return GL_INT;
-			case ShaderDataType::Bool:		return GL_BOOL;
-		}
-
-		CORE_ASSERT(false, "Unkown ShaderDataType!");
-		return 0;
-	}
-
 	Application::Application()
 	{
 		_instance = this;
@@ -48,43 +27,13 @@ namespace GameEngine
 		_imGuiLayer = new ImGuiLayer();
 		PushOverlay(_imGuiLayer);
 
-		glGenVertexArrays(1, &_vertexArray);
-		glBindVertexArray(_vertexArray);
-
 		float vertices[3 * 7] = {
 			-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
 			 0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
 			 0.0f,  0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f,
 		};
 
-		_vertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
-
-		{
-			BufferLayout layout = {
-				{ ShaderDataType::Float3, "a_position" },
-				{ ShaderDataType::Float4, "a_color" }
-			};
-
-			_vertexBuffer->SetLayout(layout);
-		}
-
-		uint32_t index = 0;
-		const BufferLayout& layout = _vertexBuffer->GetLayout();
-		for (const BufferElement& element : layout)
-		{
-			glEnableVertexAttribArray(index);
-			glVertexAttribPointer(index,
-								  element.GetComponentCount(),
-								  ShaderDataTypeToOpenGLBaseType(element.Type),
-								  element.Normalized ? GL_TRUE : GL_FALSE,
-								  layout.GetStride(),
-								  (const void*)element.Offset);
-			index++;
-		}
-
 		uint32_t indices[3] = { 0, 1, 2 };
-
-		_indexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 
 		std::string vertexSource = R"(
 			#version 330 core
@@ -118,6 +67,22 @@ namespace GameEngine
 			}
 		)";
 
+		BufferLayout layout = {
+			{ ShaderDataType::Float3, "a_position" },
+			{ ShaderDataType::Float4, "a_color" }
+		};
+		
+		std::shared_ptr<VertexBuffer> vertexBuffer;
+		vertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
+		vertexBuffer->SetLayout(layout);
+
+		std::shared_ptr<IndexBuffer> indexBuffer;
+		indexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
+
+		_vertexArray.reset(VertexArray::Create());
+		_vertexArray->AddVertexBuffer(vertexBuffer);
+		_vertexArray->SetIndexBuffer(indexBuffer);
+
 		_shader.reset(new Shader(vertexSource, fragmentSource));
 	}
 
@@ -134,8 +99,8 @@ namespace GameEngine
 			glClear(GL_COLOR_BUFFER_BIT);
 
 			_shader->Bind();
-			glBindVertexArray(_vertexArray);
-			glDrawElements(GL_TRIANGLES, _indexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
+			_vertexArray->Bind();
+			glDrawElements(GL_TRIANGLES, _vertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
 
 			for (Layer* layer : _layerStack)
 			{
