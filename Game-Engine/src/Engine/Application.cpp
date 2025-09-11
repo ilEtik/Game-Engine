@@ -2,10 +2,7 @@
 #include "Application.h"
 
 #include "Engine/Renderer/Renderer.h"
-
 #include "Engine/Log.h"
-
-#include <glad/glad.h>
 
 namespace GameEngine
 {
@@ -14,12 +11,6 @@ namespace GameEngine
 	Application::Application()
 	{
 		_instance = this;
-
-		// in case client doesn't set their own api
-		if (Renderer::GetAPI() == RendererAPI::None)
-		{
-			Renderer::SetAPI(RendererAPI::OpenGL);
-		}
 
 		_window = std::unique_ptr<Window>(Window::Create());
 		_window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
@@ -95,12 +86,15 @@ namespace GameEngine
 	{
 		while (_running)
 		{
-			glClearColor(0.0f, 0.0f, 0.0f, 1);
-			glClear(GL_COLOR_BUFFER_BIT);
+			RenderCommand::SetClearColor({0.0f, 0.0f, 0.0f, 1});
+			RenderCommand::Clear();
+
+			Renderer::BeginScene();
 
 			_shader->Bind();
-			_vertexArray->Bind();
-			glDrawElements(GL_TRIANGLES, _vertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+			Renderer::Submit(_vertexArray);
+
+			Renderer::EndScene();
 
 			for (Layer* layer : _layerStack)
 			{

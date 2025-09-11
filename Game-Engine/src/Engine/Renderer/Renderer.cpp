@@ -6,8 +6,17 @@
 
 namespace GameEngine
 {
-	void Renderer::SetAPI(RendererAPI rendererAPI)
+	void Renderer::BeginScene()
 	{
-		_rendererAPI = rendererAPI;
+	}
+
+	void Renderer::EndScene()
+	{
+	}
+
+	void Renderer::Submit(const std::shared_ptr<VertexArray>& vertexArray)
+	{
+		vertexArray->Bind();
+		RenderCommand::DrawIndexed(vertexArray);
 	}
 }
