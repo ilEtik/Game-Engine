@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Engine/Renderer/Buffer.h"
+#include "Engine/Renderer/Renderer.h"
 
 namespace GameEngine
 {
@@ -13,8 +14,12 @@ namespace GameEngine
 		virtual void Bind() const override;
 		virtual void Unbind() const override;
 
+		virtual void SetLayout(const BufferLayout& layout) override { _layout = layout; }
+		virtual const BufferLayout& GetLayout() const override { return _layout; }
+
 	private:
 		uint32_t _rendererId;
+		BufferLayout _layout;
 	};
 
 	class OpenGLIndexBuffer : public IndexBuffer

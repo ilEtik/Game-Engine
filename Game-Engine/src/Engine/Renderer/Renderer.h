@@ -10,10 +10,11 @@ namespace GameEngine
 
 	class Renderer
 	{
-	public: 
+	public:
 		inline static RendererAPI GetAPI() { return _rendererAPI; }
+		static void SetAPI(RendererAPI rendererAPI);
 
 	private:
-		static RendererAPI _rendererAPI;
+		inline static RendererAPI _rendererAPI { RendererAPI::None };
 	};
 }
