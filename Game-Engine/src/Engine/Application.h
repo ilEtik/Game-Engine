@@ -10,6 +10,7 @@
 
 #include "Engine/Renderer/Shader.h"
 #include "Engine/Renderer/VertexArray.h"
+#include "Engine/Renderer/OrthographicCamera.h"
 
 namespace GameEngine
 {
@@ -45,6 +46,8 @@ namespace GameEngine
 
 		std::shared_ptr<Shader> _shader;
 		std::shared_ptr<VertexArray> _vertexArray;
+
+		OrthographicCamera _camera;
 	};
 
 	//To be defined in client.

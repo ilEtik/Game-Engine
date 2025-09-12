@@ -8,7 +8,8 @@ namespace GameEngine
 {
 	Application* Application::_instance = nullptr;
 
-	Application::Application()
+	Application::Application() 
+		: _camera(-1.6f, 1.6f, -0.9f, 0.9f)
 	{
 		_instance = this;
 
@@ -32,6 +33,8 @@ namespace GameEngine
 			layout(location = 0) in vec3 a_position;
 			layout(location = 1) in vec4 a_color;
 
+			uniform mat4 u_ViewProjection;
+
 			out vec3 v_Position;
 			out vec4 v_Color;
 
@@ -39,7 +42,7 @@ namespace GameEngine
 			{
 				v_Position = a_position;
 				v_Color = a_color;
-				gl_Position = vec4(a_position, 1.0);
+				gl_Position = u_ViewProjection * vec4(a_position, 1.0);
 			}
 		)";
 
@@ -89,10 +92,11 @@ namespace GameEngine
 			RenderCommand::SetClearColor({0.0f, 0.0f, 0.0f, 1});
 			RenderCommand::Clear();
 
-			Renderer::BeginScene();
+			_camera.SetRotation(45.0f);
 
-			_shader->Bind();
-			Renderer::Submit(_vertexArray);
+			Renderer::BeginScene(_camera);
+
+			Renderer::Submit(_shader, _vertexArray);
 
 			Renderer::EndScene();
 
