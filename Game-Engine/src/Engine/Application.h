@@ -8,10 +8,6 @@
 
 #include "Engine/ImGui/ImGuiLayer.h"
 
-#include "Engine/Renderer/Shader.h"
-#include "Engine/Renderer/VertexArray.h"
-#include "Engine/Renderer/OrthographicCamera.h"
-
 namespace GameEngine
 {
 	class GAMEENGINE_API Application
@@ -43,11 +39,6 @@ namespace GameEngine
 		bool _running = true;
 
 		ImGuiLayer* _imGuiLayer;
-
-		std::shared_ptr<Shader> _shader;
-		std::shared_ptr<VertexArray> _vertexArray;
-
-		OrthographicCamera _camera;
 	};
 
 	//To be defined in client.
