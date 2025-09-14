@@ -4,6 +4,8 @@
 #include "Engine/Renderer/Renderer.h"
 #include "Engine/Log.h"
 
+#include <GLFW/glfw3.h>
+
 namespace GameEngine
 {
 	Application* Application::_instance = nullptr;
@@ -28,9 +30,13 @@ namespace GameEngine
 	{
 		while (_running)
 		{
+			float time = (float)glfwGetTime(); //TODO: Platform::GetTime()
+			Timestep deltaTime = time - _lastFrameTime;
+			_lastFrameTime = time;
+
 			for (Layer* layer : _layerStack)
 			{
-				layer->OnUpdate();
+				layer->OnUpdate(deltaTime);
 			}
 
 			// will be moved to render threat later

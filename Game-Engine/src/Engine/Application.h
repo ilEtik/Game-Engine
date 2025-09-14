@@ -6,6 +6,8 @@
 #include "Events/ApplicationEvent.h"
 #include "Engine/LayerStack.h"
 
+#include "Engine/Core/Timestep.h"
+
 #include "Engine/ImGui/ImGuiLayer.h"
 
 namespace GameEngine
@@ -39,6 +41,8 @@ namespace GameEngine
 		bool _running = true;
 
 		ImGuiLayer* _imGuiLayer;
+
+		float _lastFrameTime = 0.0f;
 	};
 
 	//To be defined in client.

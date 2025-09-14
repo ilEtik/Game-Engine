@@ -3,6 +3,8 @@
 #include "Engine/Core.h"
 #include "Engine/Events/Event.h"
 
+#include "Engine/Core/Timestep.h"
+
 namespace GameEngine
 {
 	class GAMEENGINE_API Layer
@@ -13,7 +15,7 @@ namespace GameEngine
 
 		virtual void OnAttach() { }
 		virtual void OnDetach() { }
-		virtual void OnUpdate() { }
+		virtual void OnUpdate(Timestep deltaTime) { }
 		virtual void OnImGuiRender() { }
 		virtual void OnEvent(Event& event) { }
 

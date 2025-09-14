@@ -1,12 +1,14 @@
 #include <GameEngine.h>
 
+#include <glm/gtc/matrix_transform.hpp>
+
 #include "imgui/imgui.h"
 
 class ExampleLayer : public GameEngine::Layer
 {
 public:
-	ExampleLayer() 
-		: Layer("Example"), _camera(-1.6f, 1.6f, -0.9f, 0.9f), _cameraPosition(0.0f)
+	ExampleLayer()
+		: Layer("Example"), _camera(-1.6f, 1.6f, -0.9f, 0.9f), _cameraPosition(0.0f), _trianglePosition(0.0f)
 	{
 		float vertices[3 * 7] = {
 			-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,
@@ -23,6 +25,7 @@ public:
 			layout(location = 1) in vec4 a_color;
 
 			uniform mat4 u_ViewProjection;
+			uniform mat4 u_Transform;
 
 			out vec3 v_Position;
 			out vec4 v_Color;
@@ -31,7 +34,7 @@ public:
 			{
 				v_Position = a_position;
 				v_Color = a_color;
-				gl_Position = u_ViewProjection * vec4(a_position, 1.0);
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_position, 1.0);
 			}
 		)";
 
@@ -69,23 +72,40 @@ public:
 		_shader.reset(new GameEngine::Shader(vertexSource, fragmentSource));
 	}
 
-	virtual void OnUpdate() override
+	virtual void OnUpdate(GameEngine::Timestep deltaTime) override
 	{
 		if (GameEngine::Input::IsKeyPressed(GE_KEY_W))
 		{
-			_cameraPosition.y -= _cameraSpeed;
+			_cameraPosition.y += _cameraSpeed * deltaTime;
 		}
 		if (GameEngine::Input::IsKeyPressed(GE_KEY_A))
 		{
-			_cameraPosition.x += _cameraSpeed;
+			_cameraPosition.x -= _cameraSpeed * deltaTime;
 		}
 		if (GameEngine::Input::IsKeyPressed(GE_KEY_S))
 		{
-			_cameraPosition.y += _cameraSpeed;
+			_cameraPosition.y -= _cameraSpeed * deltaTime;
 		}
 		if (GameEngine::Input::IsKeyPressed(GE_KEY_D))
 		{
-			_cameraPosition.x -= _cameraSpeed;
+			_cameraPosition.x += _cameraSpeed * deltaTime;
+		}
+
+		if (GameEngine::Input::IsKeyPressed(GE_KEY_I))
+		{
+			_trianglePosition.y += _triangleSpeed * deltaTime;
+		}
+		if (GameEngine::Input::IsKeyPressed(GE_KEY_J))
+		{
+			_trianglePosition.x -= _triangleSpeed * deltaTime;
+		}
+		if (GameEngine::Input::IsKeyPressed(GE_KEY_K))
+		{
+			_trianglePosition.y -= _triangleSpeed * deltaTime;
+		}
+		if (GameEngine::Input::IsKeyPressed(GE_KEY_L))
+		{
+			_trianglePosition.x += _triangleSpeed * deltaTime;
 		}
 
 		GameEngine::RenderCommand::SetClearColor({ 0.0f, 0.0f, 0.0f, 1 });
@@ -95,7 +115,9 @@ public:
 
 		GameEngine::Renderer::BeginScene(_camera);
 
-		GameEngine::Renderer::Submit(_shader, _vertexArray);
+		glm::mat4 transform = glm::translate(glm::mat4(1.0f), _trianglePosition);
+
+		GameEngine::Renderer::Submit(_shader, _vertexArray, transform);
 
 		GameEngine::Renderer::EndScene();
 	}
@@ -114,7 +136,10 @@ private:
 
 	GameEngine::OrthographicCamera _camera;
 	glm::vec3 _cameraPosition;
-	float _cameraSpeed = 0.1f;
+	float _cameraSpeed = 1.0f;
+
+	glm::vec3 _trianglePosition;
+	float _triangleSpeed = 0.5f;
 };
 
 class Sandbox : public GameEngine::Application
