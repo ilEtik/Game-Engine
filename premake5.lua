@@ -16,6 +16,7 @@ IncludeDir["glfw"] = "Game-Engine/vendor/glfw/include"
 IncludeDir["glad"] = "Game-Engine/vendor/glad/include"
 IncludeDir["imgui"] = "Game-Engine/vendor/imgui"
 IncludeDir["glm"] = "Game-Engine/vendor/glm"
+IncludeDir["stb_image"] = "Game-Engine/vendor/stb_image"
 
 group "Dependencies"
 	include "Game-Engine/vendor/glfw"
@@ -42,6 +43,8 @@ project "Game-Engine"
 	{
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/stb_image/**.h",
+		"%{prj.name}/vendor/stb_image/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl"
 	}
@@ -59,7 +62,8 @@ project "Game-Engine"
 		"%{IncludeDir.glfw}",
 		"%{IncludeDir.glad}",
 		"%{IncludeDir.imgui}",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.stb_image}"
 	}
 
 	links

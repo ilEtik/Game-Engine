@@ -1,17 +1,18 @@
 #include "gepch.h"
-#include "Shader.h"
+#include "Texture.h"
 
 #include "Renderer.h"
-#include "Platform/OpenGL/OpenGLShader.h"
+#include "Platform/OpenGL/OpenGLTexture.h"
 
 namespace Engine
 {
-	Ref<Shader> Shader::Create(const std::string& vertexSource, const std::string& fragmentSource)
+
+	Ref<Texture2D> Texture2D::Create(const std::string& path)
 	{
 		switch (Renderer::GetAPI())
 		{
 			case RendererAPI::API::None:	CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-			case RendererAPI::API::OpenGL:	return std::make_shared<OpenGLShader>(vertexSource, fragmentSource);
+			case RendererAPI::API::OpenGL:	return std::make_shared<OpenGLTexture2D>(path);
 		}
 
 		CORE_ASSERT(false, "Unknown RendererAPI!");
