@@ -2,9 +2,9 @@
 
 #include "Engine/Core.h"
 
-namespace GameEngine
+namespace Engine
 {
-	class GAMEENGINE_API Input
+	class ENGINE_API Input
 	{
 	public:
 		inline static bool IsKeyPressed(int keycode) { return _instance->IsKeyPressedImpl(keycode); }

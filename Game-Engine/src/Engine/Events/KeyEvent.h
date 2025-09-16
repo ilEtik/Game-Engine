@@ -2,10 +2,10 @@
 
 #include "Event.h"
 
-namespace GameEngine
+namespace Engine
 {
 
-	class GAMEENGINE_API KeyEvent : public Event
+	class ENGINE_API KeyEvent : public Event
 	{
 	public:
 		inline int GetKeyCode() const { return m_KeyCode; }
@@ -21,7 +21,7 @@ namespace GameEngine
 		int m_KeyCode;
 	};
 
-	class GAMEENGINE_API KeyPressedEvent : public KeyEvent
+	class ENGINE_API KeyPressedEvent : public KeyEvent
 	{
 	public:
 		KeyPressedEvent(const int keycode, const int repeatCount)
@@ -42,7 +42,7 @@ namespace GameEngine
 		int m_RepeatCount;
 	};
 
-	class GAMEENGINE_API KeyReleasedEvent : public KeyEvent
+	class ENGINE_API KeyReleasedEvent : public KeyEvent
 	{
 	public:
 		KeyReleasedEvent(const int keycode)
@@ -58,7 +58,7 @@ namespace GameEngine
 		EVENT_CLASS_TYPE(KeyReleased)
 	};
 
-	class GAMEENGINE_API KeyTypedEvent : public KeyEvent
+	class ENGINE_API KeyTypedEvent : public KeyEvent
 	{
 	public:
 		KeyTypedEvent(const int keycode)

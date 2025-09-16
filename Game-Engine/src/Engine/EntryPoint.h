@@ -2,13 +2,13 @@
 
 #ifdef GE_PLATFORM_WINDOWS
 
-extern GameEngine::Application* GameEngine::CreateApplication();
+extern Engine::Application* Engine::CreateApplication();
 
 int main(int argc, char** argv)
 {
-	GameEngine::Log::Init();
+	Engine::Log::Init();
 
-	GameEngine::Application* app = GameEngine::CreateApplication();
+	Engine::Application* app = Engine::CreateApplication();
 	app->Run();
 	delete app;
 }

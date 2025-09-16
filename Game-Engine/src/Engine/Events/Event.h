@@ -3,7 +3,7 @@
 #include "gepch.h"
 #include "Engine/Core.h"
 
-namespace GameEngine {
+namespace Engine {
 
 	// Events in the Game Engine are currently blocking, meaning when an event occurs it
 	// immediately gets dispatched and must be dealt with right then an there.
@@ -35,7 +35,7 @@ namespace GameEngine {
 
 #define EVENT_CLASS_CATEGORY(category) virtual int GetCategoryFlags() const override { return category; }
 
-	class GAMEENGINE_API Event
+	class ENGINE_API Event
 	{
 	public:
 		virtual ~Event() = default;

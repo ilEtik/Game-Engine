@@ -3,7 +3,7 @@
 #include "Engine/Renderer/Buffer.h"
 #include "Engine/Renderer/Renderer.h"
 
-namespace GameEngine
+namespace Engine
 {
 	class OpenGLVertexBuffer : public VertexBuffer
 	{

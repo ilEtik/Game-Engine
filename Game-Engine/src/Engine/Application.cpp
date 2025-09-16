@@ -6,7 +6,7 @@
 
 #include <GLFW/glfw3.h>
 
-namespace GameEngine
+namespace Engine
 {
 	Application* Application::_instance = nullptr;
 

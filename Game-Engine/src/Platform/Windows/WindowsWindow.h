@@ -5,7 +5,7 @@
 
 #include <glfw/glfw3.h>
 
-namespace GameEngine
+namespace Engine
 {
 	class WindowsWindow : public Window
 	{

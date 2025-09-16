@@ -4,9 +4,9 @@
 #include "spdlog/spdlog.h"
 #include "spdlog/fmt/ostr.h"
 
-namespace GameEngine
+namespace Engine
 {
-	class GAMEENGINE_API Log
+	class ENGINE_API Log
 	{
 	public:
 		static void Init();
@@ -21,15 +21,15 @@ namespace GameEngine
 }
 
 // Core log macros
-#define CORE_LOG_TRACE(...)		::GameEngine::Log::GetCoreLogger()->trace(__VA_ARGS__)
-#define CORE_LOG_INFO(...)		::GameEngine::Log::GetCoreLogger()->info(__VA_ARGS__)
-#define CORE_LOG_WARN(...)		::GameEngine::Log::GetCoreLogger()->warn(__VA_ARGS__)
-#define CORE_LOG_ERROR(...)		::GameEngine::Log::GetCoreLogger()->error(__VA_ARGS__)
-#define CORE_LOG_CRITICAL(...)	::GameEngine::Log::GetCoreLogger()->critical(__VA_ARGS__)
+#define CORE_LOG_TRACE(...)		::Engine::Log::GetCoreLogger()->trace(__VA_ARGS__)
+#define CORE_LOG_INFO(...)		::Engine::Log::GetCoreLogger()->info(__VA_ARGS__)
+#define CORE_LOG_WARN(...)		::Engine::Log::GetCoreLogger()->warn(__VA_ARGS__)
+#define CORE_LOG_ERROR(...)		::Engine::Log::GetCoreLogger()->error(__VA_ARGS__)
+#define CORE_LOG_CRITICAL(...)	::Engine::Log::GetCoreLogger()->critical(__VA_ARGS__)
 
 // Client log macros
-#define LOG_TRACE(...)			::GameEngine::Log::GetClientLogger()->trace(__VA_ARGS__)
-#define LOG_INFO(...)			::GameEngine::Log::GetClientLogger()->info(__VA_ARGS__)
-#define LOG_WARN(...)			::GameEngine::Log::GetClientLogger()->warn(__VA_ARGS__)
-#define LOG_ERROR(...)			::GameEngine::Log::GetClientLogger()->error(__VA_ARGS__)
-#define LOG_CRITICAL(...)		::GameEngine::Log::GetClientLogger()->critical(__VA_ARGS__)
+#define LOG_TRACE(...)			::Engine::Log::GetClientLogger()->trace(__VA_ARGS__)
+#define LOG_INFO(...)			::Engine::Log::GetClientLogger()->info(__VA_ARGS__)
+#define LOG_WARN(...)			::Engine::Log::GetClientLogger()->warn(__VA_ARGS__)
+#define LOG_ERROR(...)			::Engine::Log::GetClientLogger()->error(__VA_ARGS__)
+#define LOG_CRITICAL(...)		::Engine::Log::GetClientLogger()->critical(__VA_ARGS__)

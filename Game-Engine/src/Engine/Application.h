@@ -10,9 +10,9 @@
 
 #include "Engine/ImGui/ImGuiLayer.h"
 
-namespace GameEngine
+namespace Engine
 {
-	class GAMEENGINE_API Application
+	class ENGINE_API Application
 	{
 	public:
 		Application();

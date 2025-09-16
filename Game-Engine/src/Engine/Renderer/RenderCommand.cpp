@@ -3,7 +3,7 @@
 
 #include "Platform/OpenGL/OpenGLRendererAPI.h"
 
-namespace GameEngine
+namespace Engine
 {
 	RendererAPI* RenderCommand::_rendererAPI = new OpenGLRendererAPI();
 }

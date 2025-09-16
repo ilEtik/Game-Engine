@@ -5,7 +5,7 @@
 
 #include <glm/gtc/type_ptr.hpp>
 
-namespace GameEngine
+namespace Engine
 {
 	OpenGLShader::OpenGLShader(const std::string& vertexSource, const std::string& fragmentSource)
 	{

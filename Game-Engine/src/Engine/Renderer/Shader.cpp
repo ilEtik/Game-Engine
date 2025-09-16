@@ -4,7 +4,7 @@
 #include "Renderer.h"
 #include "Platform/OpenGL/OpenGLShader.h"
 
-namespace GameEngine
+namespace Engine
 {
 	Shader* Shader::Create(const std::string& vertexSource, const std::string& fragmentSource)
 	{

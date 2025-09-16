@@ -7,7 +7,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-class ExampleLayer : public GameEngine::Layer
+class ExampleLayer : public Engine::Layer
 {
 public:
 	ExampleLayer()
@@ -53,53 +53,53 @@ public:
 			}
 		)";
 
-		GameEngine::BufferLayout layout = {
-			{ GameEngine::ShaderDataType::Float3, "a_position" },
-			{ GameEngine::ShaderDataType::Float4, "a_color" }
+		Engine::BufferLayout layout = {
+			{ Engine::ShaderDataType::Float3, "a_position" },
+			{ Engine::ShaderDataType::Float4, "a_color" }
 		};
 
-		std::shared_ptr<GameEngine::VertexBuffer> vertexBuffer;
-		vertexBuffer.reset(GameEngine::VertexBuffer::Create(vertices, sizeof(vertices)));
+		Engine::Ref<Engine::VertexBuffer> vertexBuffer;
+		vertexBuffer.reset(Engine::VertexBuffer::Create(vertices, sizeof(vertices)));
 		vertexBuffer->SetLayout(layout);
 
-		std::shared_ptr<GameEngine::IndexBuffer> indexBuffer;
-		indexBuffer.reset(GameEngine::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
+		Engine::Ref<Engine::IndexBuffer> indexBuffer;
+		indexBuffer.reset(Engine::IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
 
-		_vertexArray.reset(GameEngine::VertexArray::Create());
+		_vertexArray.reset(Engine::VertexArray::Create());
 		_vertexArray->AddVertexBuffer(vertexBuffer);
 		_vertexArray->SetIndexBuffer(indexBuffer);
 
-		_flatColorShader.reset(GameEngine::Shader::Create(flatColorVertexSource, flatColorFragmentSource));
+		_flatColorShader.reset(Engine::Shader::Create(flatColorVertexSource, flatColorFragmentSource));
 	}
 
-	virtual void OnUpdate(GameEngine::Timestep deltaTime) override
+	virtual void OnUpdate(Engine::Timestep deltaTime) override
 	{
-		if (GameEngine::Input::IsKeyPressed(GE_KEY_W))
+		if (Engine::Input::IsKeyPressed(GE_KEY_W))
 		{
 			_cameraPosition.y += _cameraSpeed * deltaTime;
 		}
-		if (GameEngine::Input::IsKeyPressed(GE_KEY_A))
+		if (Engine::Input::IsKeyPressed(GE_KEY_A))
 		{
 			_cameraPosition.x -= _cameraSpeed * deltaTime;
 		}
-		if (GameEngine::Input::IsKeyPressed(GE_KEY_S))
+		if (Engine::Input::IsKeyPressed(GE_KEY_S))
 		{
 			_cameraPosition.y -= _cameraSpeed * deltaTime;
 		}
-		if (GameEngine::Input::IsKeyPressed(GE_KEY_D))
+		if (Engine::Input::IsKeyPressed(GE_KEY_D))
 		{
 			_cameraPosition.x += _cameraSpeed * deltaTime;
 		}
 
-		GameEngine::RenderCommand::SetClearColor({ 0.0f, 0.0f, 0.0f, 1 });
-		GameEngine::RenderCommand::Clear();
+		Engine::RenderCommand::SetClearColor({ 0.0f, 0.0f, 0.0f, 1.0f });
+		Engine::RenderCommand::Clear();
 
 		_camera.SetPosition(_cameraPosition);
 
-		GameEngine::Renderer::BeginScene(_camera);
+		Engine::Renderer::BeginScene(_camera);
 
-		std::dynamic_pointer_cast<GameEngine::OpenGLShader>(_flatColorShader)->Bind();
-		std::dynamic_pointer_cast<GameEngine::OpenGLShader>(_flatColorShader)->UploadUniformFloat3("u_Color", _triangleColor);
+		std::dynamic_pointer_cast<Engine::OpenGLShader>(_flatColorShader)->Bind();
+		std::dynamic_pointer_cast<Engine::OpenGLShader>(_flatColorShader)->UploadUniformFloat3("u_Color", _triangleColor);
 
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
@@ -109,11 +109,11 @@ public:
 			{
 				glm::vec3 pos(x * 0.11f, y * 0.11f, 0.0f);
 				glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
-				GameEngine::Renderer::Submit(_flatColorShader, _vertexArray, transform);
+				Engine::Renderer::Submit(_flatColorShader, _vertexArray, transform);
 			}
 		}
 
-		GameEngine::Renderer::EndScene();
+		Engine::Renderer::EndScene();
 	}
 
 	virtual void OnImGuiRender() override
@@ -123,22 +123,22 @@ public:
 		ImGui::End();
 	}
 
-	void OnEvent(GameEngine::Event& event) override
+	void OnEvent(Engine::Event& event) override
 	{
 	}
 
 private:
-	std::shared_ptr<GameEngine::Shader> _flatColorShader;
-	std::shared_ptr<GameEngine::VertexArray> _vertexArray;
+	Engine::Ref<Engine::Shader> _flatColorShader;
+	Engine::Ref<Engine::VertexArray> _vertexArray;
 
-	GameEngine::OrthographicCamera _camera;
+	Engine::OrthographicCamera _camera;
 	glm::vec3 _cameraPosition;
 	float _cameraSpeed = 1.0f;
 
 	glm::vec3 _triangleColor = { 0.2f, 0.3f, 0.8f };
 };
 
-class Sandbox : public GameEngine::Application
+class Sandbox : public Engine::Application
 {
 public:
 	Sandbox()
@@ -152,7 +152,7 @@ public:
 	}
 };
 
-GameEngine::Application* GameEngine::CreateApplication()
+Engine::Application* Engine::CreateApplication()
 {
 	return new Sandbox();
 }

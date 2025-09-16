@@ -5,9 +5,9 @@
 
 #include "Engine/Core/Timestep.h"
 
-namespace GameEngine
+namespace Engine
 {
-	class GAMEENGINE_API Layer
+	class ENGINE_API Layer
 	{
 	public:
 		Layer(const std::string& name = "Layer");

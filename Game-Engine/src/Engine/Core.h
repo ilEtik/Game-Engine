@@ -1,14 +1,16 @@
 #pragma once
 
+#include <memory>
+
 #ifdef GE_PLATFORM_WINDOWS
 	#if GE_DYNAMIC_LINK
 		#ifdef GE_BUILD_DLL
-			#define GAMEENGINE_API _declspec(dllexport)
+			#define ENGINE_API _declspec(dllexport)
 		#else
-			#define GAMEENGINE_API _declspec(dllimport)
+			#define ENGINE_API _declspec(dllimport)
 		#endif
 	#else
-		#define GAMEENGINE_API
+		#define ENGINE_API
 	#endif
 #else
 	#error GameEngine only supports Windows!
@@ -27,3 +29,12 @@
 #endif
 
 #define BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
+
+namespace Engine
+{
+	template<typename T>
+	using Scope = std::unique_ptr<T>;
+
+	template<typename T>
+	using Ref = std::shared_ptr<T>;
+}

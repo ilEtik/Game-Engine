@@ -5,7 +5,7 @@
 
 #include "Platform/OpenGL/OpenGLVertexArray.h"
 
-namespace GameEngine
+namespace Engine
 {
 	VertexArray* VertexArray::Create()
 	{

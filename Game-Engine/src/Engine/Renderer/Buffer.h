@@ -2,7 +2,7 @@
 
 class Renderer;
 
-namespace GameEngine
+namespace Engine
 {
 	enum class ShaderDataType
 	{

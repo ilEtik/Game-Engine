@@ -5,9 +5,9 @@
 
 #include <vector>
 
-namespace GameEngine
+namespace Engine
 {
-	class GAMEENGINE_API LayerStack
+	class ENGINE_API LayerStack
 	{
 	public:
 		LayerStack();

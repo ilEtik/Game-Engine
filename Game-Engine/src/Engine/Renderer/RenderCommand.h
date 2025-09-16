@@ -2,7 +2,7 @@
 
 #include "Engine/Renderer/RendererAPI.h"
 
-namespace GameEngine
+namespace Engine
 {
 	class RenderCommand
 	{
@@ -17,7 +17,7 @@ namespace GameEngine
 			_rendererAPI->Clear();
 		}
 
-		inline static void DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray)
+		inline static void DrawIndexed(const Ref<VertexArray>& vertexArray)
 		{
 			_rendererAPI->DrawIndexed(vertexArray);
 		}

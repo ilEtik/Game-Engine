@@ -5,7 +5,7 @@
 #include "Engine/Core.h"
 #include "Engine/Events/Event.h"
 
-namespace GameEngine
+namespace Engine
 {
 	struct WindowProps
 	{
@@ -21,7 +21,7 @@ namespace GameEngine
 		}
 	};
 
-	class GAMEENGINE_API Window
+	class ENGINE_API Window
 	{
 	public:
 		using EventCallbackFn = std::function<void(Event&)>;

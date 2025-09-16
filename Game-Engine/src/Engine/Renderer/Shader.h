@@ -2,7 +2,7 @@
 
 #include <string>
 
-namespace GameEngine
+namespace Engine
 {
 	class Shader
 	{

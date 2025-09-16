@@ -4,7 +4,7 @@
 
 #include "Engine/Renderer/Shader.h"
 
-namespace GameEngine
+namespace Engine
 {
 	class OpenGLShader : public Shader
 	{

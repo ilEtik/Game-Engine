@@ -4,7 +4,7 @@
 #include "Engine/Application.h"
 #include <GLFW/glfw3.h>
 
-namespace GameEngine
+namespace Engine
 {
 	Input* Input::_instance = new WindowsInput();
 

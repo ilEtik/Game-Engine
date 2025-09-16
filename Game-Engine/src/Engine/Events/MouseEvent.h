@@ -2,9 +2,9 @@
 
 #include "Event.h"
 
-namespace GameEngine
+namespace Engine
 {
-	class GAMEENGINE_API MouseMovedEvent : public Event
+	class ENGINE_API MouseMovedEvent : public Event
 	{
 	public:
 		MouseMovedEvent(const float x, const float y)
@@ -27,7 +27,7 @@ namespace GameEngine
 		float m_MouseX, m_MouseY;
 	};
 
-	class GAMEENGINE_API MouseScrolledEvent : public Event
+	class ENGINE_API MouseScrolledEvent : public Event
 	{
 	public:
 		MouseScrolledEvent(const float xOffset, const float yOffset)
@@ -50,7 +50,7 @@ namespace GameEngine
 		float m_XOffset, m_YOffset;
 	};
 
-	class GAMEENGINE_API MouseButtonEvent : public Event
+	class ENGINE_API MouseButtonEvent : public Event
 	{
 	public:
 		int GetMouseButton() const { return m_Button; }
@@ -66,7 +66,7 @@ namespace GameEngine
 		int m_Button;
 	};
 
-	class GAMEENGINE_API MouseButtonPressedEvent : public MouseButtonEvent
+	class ENGINE_API MouseButtonPressedEvent : public MouseButtonEvent
 	{
 	public:
 		MouseButtonPressedEvent(const int button)
@@ -82,7 +82,7 @@ namespace GameEngine
 		EVENT_CLASS_TYPE(MouseButtonPressed)
 	};
 
-	class GAMEENGINE_API MouseButtonReleasedEvent : public MouseButtonEvent
+	class ENGINE_API MouseButtonReleasedEvent : public MouseButtonEvent
 	{
 	public:
 		MouseButtonReleasedEvent(const int button)

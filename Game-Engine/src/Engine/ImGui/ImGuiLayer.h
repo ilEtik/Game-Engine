@@ -5,9 +5,9 @@
 #include "Engine/Events/KeyEvent.h"
 #include "Engine/Events/ApplicationEvent.h"
 
-namespace GameEngine
+namespace Engine
 {
-	class GAMEENGINE_API ImGuiLayer : public Layer
+	class ENGINE_API ImGuiLayer : public Layer
 	{
 	public:
 		ImGuiLayer();

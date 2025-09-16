@@ -2,7 +2,7 @@
 
 #include <glm/glm.hpp>
 
-namespace GameEngine
+namespace Engine
 {
 	class OrthographicCamera
 	{
