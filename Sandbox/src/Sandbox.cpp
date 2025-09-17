@@ -78,6 +78,7 @@ public:
 		_textureShader = Engine::Shader::Create(textureVertexSource, textureFragmentSource);
 
 		_texture = Engine::Texture2D::Create("assets/textures/Checkerboard.png");
+		_chernoLogoTexture = Engine::Texture2D::Create("assets/textures/ChernoLogo.png");
 
 		std::dynamic_pointer_cast<Engine::OpenGLShader>(_textureShader)->Bind();
 		std::dynamic_pointer_cast<Engine::OpenGLShader>(_textureShader)->UploadUniformInt("u_Texture", 0);
@@ -153,6 +154,9 @@ public:
 		_texture->Bind();
 		Engine::Renderer::Submit(_textureShader, _squareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
+		_chernoLogoTexture->Bind();
+		Engine::Renderer::Submit(_textureShader, _squareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+
 		Engine::Renderer::EndScene();
 	}
 
@@ -171,7 +175,7 @@ private:
 	Engine::Ref<Engine::Shader> _flatColorShader, _textureShader;
 	Engine::Ref<Engine::VertexArray> _squareVA;
 
-	Engine::Ref<Engine::Texture2D> _texture;
+	Engine::Ref<Engine::Texture2D> _texture, _chernoLogoTexture;
 
 	Engine::OrthographicCamera _camera;
 	glm::vec3 _cameraPosition;

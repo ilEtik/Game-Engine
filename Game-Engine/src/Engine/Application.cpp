@@ -17,6 +17,8 @@ namespace Engine
 		_window = std::unique_ptr<Window>(Window::Create());
 		_window->SetEventCallback(BIND_EVENT_FN(Application::OnEvent));
 
+		Renderer::Init();
+
 		_imGuiLayer = new ImGuiLayer();
 		PushOverlay(_imGuiLayer);
 	}
